@@ -3,7 +3,11 @@ require("dotenv").config();
 const http = require("http");
 const { Server } = require("socket.io");
 const app = require("./app");
+const errorMiddleware = require("./src/middlewares/error.middleware");
+const mainRoute = require("./src/routes");
+const connectDb = require("./src/config/connectDb");
 const server = http.createServer(app);
+connectDb()
 
 const io = new Server(server, {
   cors: {
@@ -20,6 +24,10 @@ io.on("connection", (socket) => {
 });
 
 app.set("io", io);
+
+app.use("/v1/api", mainRoute)
+
+app.use(errorMiddleware)
 
 const PORT = process.env.PORT || 5000;
 
