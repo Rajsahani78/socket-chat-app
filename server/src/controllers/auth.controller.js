@@ -4,12 +4,12 @@ const asyncHandler = require("../utils/asyncHandler")
 
 const createRegister = asyncHandler(async (req, res) => {
     const body = req.body
-    console.log(body)
     const user = await registerService(body);
 
     res.status(201).json({
         success: true,
-        message: "User register successful"
+        message: "User register successful",
+        data: user
     })
 
 })

@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const mainRoute = require("./src/routes");
+const errorMiddleware = require("./src/middlewares/error.middleware");
 
 const app = express();
 
@@ -12,6 +14,8 @@ app.use(
 );
 
 // Routes
-// app.use("/api/users", userRoutes);
+app.use("/v1/api", mainRoute)
+
+app.use(errorMiddleware)
 
 module.exports = app;

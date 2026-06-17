@@ -1,6 +1,6 @@
 const { generatePassword } = require("../helpers/generatePassword")
 const { generateToken } = require("../helpers/token")
-const valiedatePassword = require("../helpers/validatePassword")
+const validatePasswowrd = require("../helpers/validatePassword")
 const User = require("../models/user.model")
 const AppError = require("../utils/appError")
 
@@ -18,19 +18,22 @@ const registerService = async (body) => {
         password: hashedPassword
     })
     await user.save()
+    const token = generateToken({ id: user._id, email: user.email })
+    return token
+
 }
 
 const loginService = async (body) => {
     const user = await User.findOne({ email: body.email })
 
     if (!user) {
-        throw new AppError("User does not found with this email", 404)
+        throw new AppError("Invalid email or password", 401);
     }
 
-    const isValidaPassword = await valiedatePassword(user.password, body.password);
+    const isValidPassword = await validatePasswowrd(user.password, body.password);
 
-    if (!isValidaPassword) {
-        throw new AppError("password is not valid", 400)
+    if (!isValidPassword) {
+        throw new AppError("Invalid email or password", 401);
     }
 
     const token = generateToken({ id: user._id, email: user.email })

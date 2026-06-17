@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
-const valiedatePassword = (userPassword, inputPassword) => {
+const validatePasswowrd = (userPassword, inputPassword) => {
     const isValid = bcrypt.compare(inputPassword, userPassword)
     return isValid
 }
-module.exports = valiedatePassword
+module.exports = validatePasswowrd

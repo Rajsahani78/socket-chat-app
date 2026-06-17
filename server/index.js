@@ -25,9 +25,7 @@ io.on("connection", (socket) => {
 
 app.set("io", io);
 
-app.use("/v1/api", mainRoute)
 
-app.use(errorMiddleware)
 
 const PORT = process.env.PORT || 5000;
 
