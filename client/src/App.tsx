@@ -1,8 +1,8 @@
-import RouteLists from "./routes/route-list"
+import RouteLists from "./routes/route-list";
 
 const App = () => {
   return (
-   <RouteLists/>
+    <RouteLists />
   )
 }
 

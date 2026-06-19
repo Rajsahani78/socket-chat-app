@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { LoginFormData, Registerform } from "../schemas/auth.schema";
 import type { LoginResponse, RegisterResponse } from "../interfaces/auth.interface";
 import { API_URL, baseUrl } from "../constants/api";
+import type { ProfileResponse, User } from "../interfaces/user.interface";
 
 export const authApi = createApi({
     reducerPath: "authApi",
@@ -22,7 +23,7 @@ export const authApi = createApi({
                 method: "POST",
                 body: credentials,
             }),
-        }),
+        })
     }),
 
 });
